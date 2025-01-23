@@ -23,11 +23,11 @@ def get_region_tools():
     ns = Namespace('dashExtensions', 'default')
     locator = dl.LocateControl(locateOptions={'enableHighAccuracy': True})
 
-    # B-120 forecast points
-    b120_points = dl.GeoJSON(url='assets/fnf_points_proj_tooltip_24.pbf', format='geobuf', id='b120-points',
-                             options=dict(pointToLayer=ns('b120_ptl')), cluster=True, superClusterOptions=dict(radius=5),
-                             hoverStyle=arrow_function(dict(weight=5, color='red', fillColor='red', dashArray='')),
-                             hideout=dict(circleOptions=dict(fillOpacity=1, color='red', weight=2, radius=5), colorscale=['cyan'], colorProp='POINT_Y', min=0, max=100))
+    # FNF stations and forecast points
+    fnf_sites = dl.GeoJSON(url='assets/fnf_stations_tooltip.pbf', format='geobuf', id='fnf-sites',
+                           options=dict(pointToLayer=ns('b120_ptl')), cluster=False, superClusterOptions=dict(radius=5),
+                           hoverStyle=arrow_function(dict(weight=5, color='red', fillColor='red', dashArray='')),
+                           hideout=dict(circleOptions=dict(fillOpacity=1, color='black', weight=2, radius=5), colorscale=['cyan'], colorProp='area', min=0, max=100))
     # B-120 watersheds
     watershed_style = dict(weight=2, opacity=1, color='darkblue', fillOpacity=0)
     b120_watersheds = dl.GeoJSON(url='assets/fnf_watershed_proj_tooltip_24.pbf', format='geobuf', id='b120-watersheds',
@@ -78,7 +78,8 @@ def get_region_tools():
 
     layers_region = [dl.Overlay([data_map, data_cbar], id='data-map-ol',  name='Data',   checked=True),
                      dl.Overlay(cbrfc_bound,    id='region-ol', name='Region', checked=True),
-                     dl.Overlay(huc_bound,      id='huc-ol', name='HUC', checked=True)]
+                     dl.Overlay(huc_bound,      id='huc-ol', name='HUC', checked=True),
+                     dl.Overlay(fnf_sites,   id='sites-ol',  name='FNF Sites',  checked=True)]
                      #dl.Overlay(nwm_rivers,       id='rivers-ol', name='Rivers', checked=False),
                      #dl.Overlay(b120_watersheds,  id='basins-ol', name='B120 Basins', checked=True),
                      #dl.Overlay(b120_points,      id='sites-ol',  name='B120 Sites',  checked=True),

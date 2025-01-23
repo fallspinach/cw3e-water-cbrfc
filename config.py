@@ -60,15 +60,9 @@ data_vars = [
 ]
           
 ## site lists
-
-all_stations = {'AMF': 'American River below Folsom Lake', 'ASP': 'Arroyo Seco near Pasadena', 'ASS': 'Arroyo Seco near Soledad', 'CSN': 'Cosumnes River at Michigan Bar', 'EFC': 'East Carson near Gardnerville', 'EWR': 'East Walker near Bridgeport', 'ERS': 'Eel River at Scotia', 'FTO': 'Feather River at Oroville', 'KWT': 'Kaweah River below Terminus reservoir', 'KRB': 'Kern River below City of Bakersfield', 'KRI': 'Kern River below Lake Isabella', 'KGF': 'Kings River below Pine Flat reservoir', 'KLO': 'Klamath River Copco to Orleans', 'MSS': 'McCloud River above Shasta Lake', 'MRC': 'Merced River below Merced Falls', 'MKM': 'Mokelumne River inflow to Pardee', 'NCD': 'Nacimiento below Nacimiento Dam', 'NPH': 'Napa River near St Helena', 'OWL': 'Owens River below Long Valley Dam', 'PSH': 'Pit River near Montgomerey and Squaw Creek', 'RRH': 'Russian River at Healdsburg', 'SBB': 'Sacramento R above Bend Bridge', 'SDT': 'Sacramento River at Delta', 'SRS': 'Salmon River at Somes Bar', 'SJF': 'San Joaquin River below Millerton Lake', 'ANM': 'Santa Ana River near Mentone', 'SSP': 'Sespe Creek near Fillmore', 'SIS': 'Shasta Lake Total Inflow', 'SNS': 'Stanislaus River below Goodwin', 'TNL': 'Trinity River near Lewiston Lake', 'TRF': 'Truckee River from Tahoe to Farad', 'SCC': 'Tule River below Lake Success', 'TLG': 'Tuolumne River below Lagrange reservoir', 'WFC': 'West Fork Carson at Woodfords', 'WWR': 'West Walker near Coleville', 'YRS': 'Yuba River near Smartsville'}
-
-# alphabetical order
-fnf_stations = ['AMF', 'CSN', 'EFC', 'EWR', 'FTO', 'KGF', 'KRI', 'KWT', 'MKM', 'MRC', 'MSS', 'PSH', 'SBB', 'SCC', 'SDT', 'SIS', 'SJF', 'SNS', 'TLG', 'TNL', 'TRF', 'WFC', 'WWR', 'YRS']
-# north to south order - DWR likes this better
-fnf_stations = ['TNL', 'SDT', 'MSS', 'PSH', 'SIS', 'SBB', 'FTO', 'YRS', 'AMF', 'CSN', 'MKM', 'SNS', 'TLG', 'MRC', 'SJF', 'KGF', 'KWT', 'SCC', 'KRI', 'TRF', 'WFC', 'EFC', 'WWR', 'EWR']
-
-fnf_id_names = {key: all_stations[key] for key in fnf_stations}
+fcsv = f'{base_url}/data/fnf_stations.csv'
+df_fnf = pd.read_csv(fcsv, dtype={'station_id': str})
+fnf_stations = df_fnf['station_id'].to_list()
 
 snow_pillow_stations = ['ADM', 'AGP', 'ALP', 'BCB', 'BCH', 'BFL', 'BGP', 'BIM', 'BKL', 'BLA', 'BLC', 'BLD', 'BLK', 'BLS', 'BMW', 'BNK', 'BSH', 'BSK', 'CAP', 'CBT', 'CDP', 'CHM', 'CHP', 'CRL', 'CSL', 'CSV', 'CWD', 'CWF', 'CXS', 'DAN', 'DDM', 'DPO', 'DSS', 'EBB', 'EP5', 'FDC', 'FLL', 'FOR', 'FRN', 'FRW', 'GEM', 'GIN', 'GKS', 'GNF', 'GNL', 'GOL', 'GRM', 'GRV', 'GRZ', 'HGM', 'HHM', 'HIG', 'HMB', 'HNT', 'HOR', 'HRK', 'HRS', 'HVN', 'HYS', 'IDC', 'IDP', 'INN', 'KIB', 'KSP', 'KTL', 'KUB', 'KUP', 'LBD', 'LLP', 'LOS', 'LVM', 'LVT', 'MB3', 'MDW', 'MED', 'MHP', 'MNT', 'MRL', 'MSK', 'MTM', 'MUM', 'NLS', 'PDS', 'PET', 'PLP', 'PSC', 'PSN', 'PSR', 'QUA', 'RBB', 'RBP', 'RCC', 'RCK', 'REL', 'RP2', 'RRM', 'RTL', 'SCN', 'SCT', 'SDF', 'SDW', 'SHM', 'SIL', 'SLI', 'SLK', 'SLM', 'SLT', 'SNM', 'SPS', 'SPT', 'SQV', 'SSM', 'STL', 'STM', 'STR', 'SWM', 'TCC', 'TK2', 'TMR', 'TNY', 'TUM', 'TUN', 'UBC', 'UTY', 'VLC', 'VRG', 'VVL', 'WC3', 'WHW', 'WTM', 'WWC']
 

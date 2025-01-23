@@ -1,11 +1,10 @@
 from main import app
-from config import all_stations
 
 from dash.dependencies import ClientsideFunction, Input, Output, State
 from datetime import datetime, timedelta
 import pandas as pd
 
-from site_tools import draw_retro, draw_mofor, draw_table, draw_table_all
+from site_tools import draw_retro
 from basin_tools import draw_basin_ts
 from snow_tools import draw_course, draw_pillow
 from river_tools import draw_mofor_river_db, draw_rev_esp
@@ -147,4 +146,19 @@ def update_basin(basin):
     return [fig_nrt, fig_nrt_m, fig_retro, fig_retro_m, is_open, stain]
     #return [fig_nrt, is_open, stain]
 
+# create/update historic time series graph in popup
+@app.callback(Output(component_id='graph-retro', component_property='figure'),
+              Output('popup-plots', 'is_open'),
+              Output('popup-plots', 'title'),
+              Input('fnf-sites', 'clickData'))
+def update_flows(fcst_point):
+    if fcst_point==None:
+        staid = 'FTO'
+        stain = 'FTO: Feather River at Oroville'
+    else:
+        staid = fcst_point['properties']['station_id']
+        stain = fcst_point['properties']['tooltip']
+    fig_retro = draw_retro(staid)
+
+    return [fig_retro, True, stain]
 

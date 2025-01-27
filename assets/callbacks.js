@@ -152,6 +152,25 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
             }
         },
 
+        // switch river vector sources according to zoom level
+        switch_river_vector: function(zoom_level, center) {
+            if (zoom_level>=10 && (center['lat']>40 && center['lat']<41.5 && center['lng']>-111 && center['lng']<-106.5)) {
+                return ['assets/nwm_reaches_yampa_snake_green_order2plus_0d001.pbf', false];
+            } else {
+                // return ['assets/nwm_reaches_cbrfc_order4plus_0d001_single_matched.pbf', true];
+                return ['assets/nwm_reaches_cbrfc_order4plus_0d001.pbf', false];
+            }
+        },
+
+        // switch region according to zoom level
+        switch_region: function(zoom_level, center) {
+            if (zoom_level>=8 && (center['lat']>40 && center['lat']<41.5 && center['lng']>-111 && center['lng']<-106.5)) {
+                return ['assets/yampa_snake_green_region_0d001.pbf', false];
+            } else {
+                return ['assets/cbrfc_5.0.pbf', false];
+            }
+        },
+
         // open the pop-up window for google doc
         open_gdoc: function(n_clicks) {
             return true;

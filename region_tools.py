@@ -47,7 +47,7 @@ def get_region_tools():
                            hideout=dict(colorscale=['black'], classes=[0], style=huc_style, colorProp='areasqkm'))
     # NWM rivers with stream_order>3 and simplified geometry
     river_style = dict(weight=1, opacity=1, color='green', fillOpacity=0)
-    nwm_rivers = dl.GeoJSON(url='assets/nwm_reaches_cnrfc_order4plus_0d001_single_matched.pbf', format='geobuf', id='nwm-rivers',
+    nwm_rivers = dl.GeoJSON(url='assets/nwm_reaches_cbrfc_order4plus_0d001.pbf', format='geobuf', id='nwm-rivers',
                             options=dict(style=ns('river_style')), zoomToBoundsOnClick=True,
                             hoverStyle=arrow_function(dict(weight=4, color='orange', dashArray='', fillOpacity=0)),
                             hideout=dict(colorscale=['black'], classes=[0], style=river_style, colorProp='feature_id'))
@@ -79,6 +79,7 @@ def get_region_tools():
     layers_region = [dl.Overlay([data_map, data_cbar], id='data-map-ol',  name='Data',   checked=True),
                      dl.Overlay(cbrfc_bound,    id='region-ol', name='Region', checked=True),
                      dl.Overlay(huc_bound,      id='huc-ol', name='HUC', checked=True),
+                     dl.Overlay(nwm_rivers,     id='rivers-ol', name='Rivers', checked=False),
                      dl.Overlay(fnf_sites,   id='sites-ol',  name='FNF Sites',  checked=True)]
                      #dl.Overlay(nwm_rivers,       id='rivers-ol', name='Rivers', checked=False),
                      #dl.Overlay(b120_watersheds,  id='basins-ol', name='B120 Basins', checked=True),

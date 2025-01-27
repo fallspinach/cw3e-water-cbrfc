@@ -102,6 +102,30 @@ app.clientside_callback(
     Input('map-region', 'zoom')
 )
 
+# callback to switch river vector sources according to zoom level
+app.clientside_callback(
+    ClientsideFunction(
+        namespace='clientside',
+        function_name='switch_river_vector'
+    ),
+    Output('nwm-rivers', 'url'),
+    Output('nwm-rivers', 'zoomToBoundsOnClick'),
+    Input('map-region', 'zoom'),
+    Input('map-region', 'center')
+)
+
+# callback to switch region boundary according to zoom level
+app.clientside_callback(
+    ClientsideFunction(
+        namespace='clientside',
+        function_name='switch_region'
+    ),
+    Output('cbrfc-bound', 'url'),
+    Output('cbrfc-bound', 'zoomToBoundsOnClick'),
+    Input('map-region', 'zoom'),
+    Input('map-region', 'center')
+)
+
 # callback to toggle collapse-openmore
 app.clientside_callback(
     ClientsideFunction(
